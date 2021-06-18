@@ -1,0 +1,74 @@
+{
+  "name": "admin-server",
+  "version": "1.0.0",
+  "description": "server",
+  "author": "guojun",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon --exec ts-node app.ts",
+    "build-ts": "tsc",
+    "build:test": "rm -fr dist && npm run lint && npm run build-ts",
+    "serve:test": "cross-env NODE_ENV=development pm2 start dist/app.js --no-daemon",
+    "build:prod": "rm -fr dist && npm run lint && npm run build-ts",
+    "serve:prod": "cross-env NODE_ENV=production pm2 start dist/app.js --no-daemon",
+    "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
+    "stop": "pm2 status && pm2 stop all"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {
+    "crypto-js": "^4.0.0",
+    "form-data": "^4.0.0",
+    "fs": "0.0.1-security",
+    "ip": "^1.1.5",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-jwt": "^4.0.1",
+    "koa-mount": "^4.0.0",
+    "koa-router": "^8.0.8",
+    "koa-session": "^5.12.3",
+    "koa-static": "^5.0.0",
+    "koa2-multiparty": "^1.0.1",
+    "moment": "^2.24.0",
+    "mysql": "^2.17.1",
+    "mysql2": "^2.1.0",
+    "path": "^0.12.7",
+    "process": "^0.11.10",
+    "sequelize": "^5.21.5",
+    "svg-captcha": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/ip": "^1.1.0",
+    "@types/koa": "^2.13.3",
+    "@types/koa-bodyparser": "^4.3.1",
+    "@types/koa-mount": "^4.0.0",
+    "@types/koa-router": "^7.4.2",
+    "@types/koa-static": "^4.0.1",
+    "@types/swagger-jsdoc": "^6.0.0",
+    "@typescript-eslint/parser": "^4.27.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.26.0",
+    "husky": "4.2.5",
+    "koa2-swagger-ui": "^5.1.0",
+    "lint-staged": "10.2.9",
+    "nodemon": "^2.0.7",
+    "pm2": "^5.1.0",
+    "prettier": "^2.3.0",
+    "swagger-jsdoc": "^6.1.0",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{ts,.tsx}": [
+      "prettier --trailing-comma es5 --single-quote --write",
+      "eslint --ignore-path .eslintignore",
+      "git add "
+    ]
+  }
+}
