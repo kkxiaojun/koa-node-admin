@@ -1,0 +1,22 @@
+{
+  "apps": [
+    {
+      "name": "xl-account-server",
+      "script": "./dist/app.js",
+      "instances": "2",
+      "exec_mode": "cluster",
+      "watch": false,
+      "watch_delay": 4000,
+      "ignore_watch" : [
+        "node_modules",
+        "src"
+      ],
+      "max_memory_restart": "1000M",
+      "min_uptime": "5s",
+      "max_restarts": 5,
+      "error_file": "./logs/pm2_xl_account_err.log",
+      "out_file": "/dev/null",
+      "log_date_format": "YYYY-MM-DD HH:mm Z"
+    }
+  ]
+}
